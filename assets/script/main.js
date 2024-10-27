@@ -1,51 +1,30 @@
-document.querySelector('.right__btn').addEventListener('click', function(event) {
-    event.preventDefault();
-
-    const email = document.querySelector('input[type="email"]');
-    const password = document.querySelector('input[type="password"]');
-    const firstName = document.querySelector('input[placeholder="first name"]');
-    const lastName = document.querySelector('input[placeholder="last name"]');
-    const show = document.querySelector('.checked'); // Phần tử để hiển thị thông báo lỗi
+function validateForm() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const show = document.querySelector('.checked');
 
     // Kiểm tra email
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email.value)) {
-        show.innerHTML = 'Please enter a valid email.';
-        email.focus();
-        return;
+    if (email === "") {
+        show.innerHTML = 'Email is empty.';
+        return false;
+    }
+    if (!emailPattern.test(email)) {
+        show.innerHTML = 'Email failed.';
+        return false;
     }
 
-    // Kiểm tra mật khẩu
-    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordPattern.test(password.value)) {
-        show.innerHTML = 'Password must have at least 8 characters, including letters, numbers, and a special character.';
-        password.focus();
-        return;
+    // Kiểm tra password
+    if (password === "") {
+        show.innerHTML = 'Please enter your password.';
+        return false;
+    }
+    if (password.length < 6) {
+        show.innerHTML = 'Password must have at least 6 character.';
+        return false;
     }
 
-    // Kiểm tra first name và last name
-    if (firstName.value.trim() === "") {
-        show.innerHTML = 'Please enter your first name.';
-        firstName.focus();
-        return;
-    }
-    if (lastName.value.trim() === "") {
-        show.innerHTML = 'Please enter your last name.';
-        lastName.focus();
-        return;
-    }
-
-    // Nếu không có lỗi, có thể gửi dữ liệu hoặc thực hiện các bước tiếp theo
-    show.innerHTML = 'Sign up successful!';
-});
-document.querySelector('.toggle-password').addEventListener('click', function() {
-    const passwordInput = document.querySelector('.password-input');
-
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        this.innerText = '🙈'; // Thay đổi biểu tượng để biểu thị trạng thái mới
-    } else {
-        passwordInput.type = 'password';
-        this.innerText = '👁️'; // Trở lại biểu tượng ban đầu
-    }
-});
+    // Nếu không có lỗi
+    show.innerHTML = 'Log in success.';
+    return true;
+}

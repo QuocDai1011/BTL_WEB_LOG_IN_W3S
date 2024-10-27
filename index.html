@@ -89,7 +89,7 @@
             <h3 class="right__heading">Log In</h3>
             <div class="right__have-account">
                 <p class="right__have-account-text">Don't have an account?</p>
-                <a href="" class="right__have-acount-link">Sign up</a>
+                <a href="https://quocdai1011.github.io/BTL_WEB_SIGN_UP_W3S/" class="right__have-acount-link">Sign up</a>
             </div>
             <div class="right__socials">
                 <div class="right__socials-top">
@@ -111,16 +111,16 @@
             </div>
             <h3 class="right__text-OR">OR</h3>
             <div class="right__input">
-                <input type="email" class="input__email input" placeholder="email">
+                <input id="email" type="email" class="input__email input" placeholder="email">
                 <div class="pass-container">
-                    <input type="password" class="input__email input password-input" placeholder="password">
+                    <input id="password" type="password" class="input__email input password-input" placeholder="password">
                     <button type="button" class="toggle-password">👁️</button>
                 </div>
             </div>
             <div class="checked"></div>
             <div class="login-btn">
                 <button class="right__btn forgot__btn">Forgot Password?</button>
-                <button class="right__btn">Login</button>
+                <button class="right__btn" onclick="validateForm()">Login</button>
             </div>
         </div>
     </div>
@@ -150,6 +150,27 @@
         <i class="help-icon fa-solid fa-question"></i>
         Help
     </button>
+    <script src="./assets/script/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const toggleButton = document.querySelector('.toggle-password');
+
+            if (toggleButton) {
+                toggleButton.addEventListener('click', function() {
+                    const passwordInput = document.getElementById('password');
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        this.innerText = '🙈';
+                    } else {
+                        passwordInput.type = 'password';
+                        this.innerText = '👁️';
+                    }
+                });
+            } else {
+                console.error("Không tìm thấy nút .toggle-password");
+            }
+        });
+    </script>
 </body>
 
 </html>
